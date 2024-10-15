@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Portal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F0F0F0; /* Soft Gray */
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #FFFFFF; /* White */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #B71234; /* TUT Red */
+        }
+
+        .sidebar p {
+            font-size: 16px;
+            color: #333; /* Charcoal */
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar nav ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar nav ul li a {
+            text-decoration: none;
+            color: #003594; /* TUT Blue */
+            font-weight: bold;
+        }
+
+        .sidebar nav ul li a:hover {
+            color: #4D9DE0; /* Sky Blue */
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        header input[type="text"] {
+            padding: 10px;
+            border: 1px solid #CCC; /* Light border for input */
+            border-radius: 4px;
+            width: 300px;
+        }
+
+        .internships {
+            background-color: #ffffff; /* Solid white for readability */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .internship-card {
+            border: 1px solid #737373e3; /* Light Silver */
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: box-shadow 0.3s;
+        }
+
+        .internship-card:hover {
+            box-shadow: 0 0 15px rgba(0, 183, 20, 0.5); /* TUT Red */
+        }
+
+        .internship-title {
+            font-size: 18px;
+            color: #B71234; /* TUT Red */
+            margin: 0 0 10px 0;
+        }
+
+        .internship-details {
+            color: #555; /* Medium gray */
+            margin-bottom: 10px;
+        }
+
+        .notify-btn, .download-btn {
+            background-color: #003594; /* TUT Blue */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .notify-btn:hover, .download-btn:hover {
+            background-color: #002D62; /* Navy Blue */
+        }
+
+        .apply-link {
+            display: inline-block;
+            background-color: #FFD700; /* Bright Yellow */
+            color: #333; /* Charcoal */
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .apply-link:hover {
+            background-color: #B71234; /* TUT Red */
+            color: white; /* Text color change on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Internship Portal</h2>
+            <p id="welcome-message">Welcome, <span id="student-number-placeholder"></span></p>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Available Internships</a></li>
+                    <li><a href="#">My Applications</a></li>
+                    <li><a href="https://www.tut.ac.za/media/docs/2025%20Course%20Information.pdf">Resources</a></li>
+                    <li><a href="https://www.tut.ac.za/mytutor-contact-us">FAQs</a></li>
+                    <li><a href="mailto:TUTConnect@outlook.com">Contact Us</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <h1>Available Internships</h1>
+                <input type="text" id="search" placeholder="Search internships...">
+            </header>
+            <section class="internships">
+                <h2>Internships</h2>
+                <div class="internship-card">
+                    <h3 class="internship-title">Software Development Intern</h3>
+                    <p class="internship-details"><strong>Company:</strong> Tech Solutions Inc. <br>
+                    <strong>Location:</strong> Remote <br>
+                    <strong>Application Deadline:</strong> 30 Nov 2024</p>
+                    <a class="apply-link" href="https://www.graduates24.com/jobs/viewjob/10731" target="_blank">Apply</a>
+                </div>
+                <div class="internship-card">
+                    <h3 class="internship-title">Marketing Intern</h3>
+                    <p class="internship-details"><strong>Company:</strong> Creative Agency <br>
+                    <strong>Location:</strong> New York, NY <br>
+                    <strong>Application Deadline:</strong> 15 Dec 2024</p>
+                    <a class="apply-link" href="https://www.graduates24.com/jobs/viewjob/10830" target="_blank">Apply</a>
+                </div>
+                
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Get the student number from local storage
+        const studentNumber = localStorage.getItem('studentNumber');
+        if (studentNumber) {
+            document.getElementById('student-number-placeholder').textContent = studentNumber;
+        } else {
+            document.getElementById('welcome-message').textContent = 'Welcome, Guest';
+        }
+        
+        // Get the search input field and the internship listings
+const searchInput = document.getElementById('search');
+const internshipListings = document.querySelectorAll('.internship-card');
+
+// Add an event listener to the search input field
+searchInput.addEventListener('input', () => {
+  // Get the search query
+  const searchQuery = searchInput.value.toLowerCase();
+
+  // Loop through the internship listings
+  internshipListings.forEach((listing) => {
+    // Get the internship title and details
+    const title = listing.querySelector('.internship-title').textContent.toLowerCase();
+    const details = listing.querySelector('.internship-details').textContent.toLowerCase();
+
+    // Check if the search query matches the internship title or details
+    if (title.includes(searchQuery) || details.includes(searchQuery)) {
+      // Show the internship listing if it matches the search query
+      listing.style.display = 'block';
+    } else {
+      // Hide the internship listing if it doesn't match the search query
+      listing.style.display = 'none';
+    }
+  });
+});
+    </script>
+</body>
+</html>
